@@ -5,15 +5,14 @@ import Globe from './component/Globe'
 
 const OrbitControls = require('three-orbitcontrols')
 
-
 class Main {
   constructor(){
     this.Globe = new Globe();
     this.Decor = new Decor(data);
     this.Decor.scene.add(this.Globe.mesh)
 
-    this.camera = new THREE.PerspectiveCamera(30, data.w / data.h, 1, 100);
-    this.camera.position.z = data.distance;
+    this.camera = new THREE.PerspectiveCamera(30, data.w / data.h, 1, 10000);
+    this.camera.position.z = data.distance
 
     this.controls = new OrbitControls(this.camera)
 

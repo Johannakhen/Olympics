@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import earthVert from 'shaders/earth.vert'
 import earthFrag from 'shaders/earth.frag'
 
-const texture = new THREE.TextureLoader().load('../../assets/world.jpg')
+const texture = new THREE.TextureLoader().load('./assets/world.jpg')
 console.log(texture)
 export default class Globe {
   constructor(){
@@ -10,13 +10,15 @@ export default class Globe {
     var material = new THREE.ShaderMaterial({
 
       uniforms: {
-        color: { type: "c", value: new THREE.Color(0xffeb3b) },
+        color: { type: "c", value: new THREE.Color(0xffff00) },
         texture: { type: "t", value: texture },
       },
       vertexShader: earthVert,
       fragmentShader: earthFrag
 
     });
+console.log(material)
+    
     this.mesh = new THREE.Mesh(geometry,material)
     this.mesh.rotation.y = Math.PI
   }
