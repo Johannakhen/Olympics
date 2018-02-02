@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-export default class Scene {
+export default class Decor {
   constructor(opt){
     console.log(opt);
 
