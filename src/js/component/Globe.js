@@ -2,7 +2,8 @@ import * as THREE from 'three'
 import earthVert from 'shaders/earth.vert'
 import earthFrag from 'shaders/earth.frag'
 
-const texture = new THREE.TextureLoader().load('./texture/world.jpg')
+const texture = new THREE.TextureLoader().load('./texture/uvgrid.jpg')
+// const texture = new THREE.TextureLoader().load('./texture/world.jpg')
 
 export default class Globe {
   constructor(){
