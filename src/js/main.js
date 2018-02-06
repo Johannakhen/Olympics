@@ -5,12 +5,12 @@ import Globe from './component/Globe'
 import Atmosphere from './component/Atmosphere'
 
 import gui from 'libs/gui'
-import { log } from 'three';
 
 const OrbitControls = require('three-orbit-controls')(THREE)
 var VARS = {
   message: 'Olympics',
   speed: .005,
+  percent: -1,
 }
 
 class Main {
@@ -27,6 +27,7 @@ class Main {
     // DAT.GUI : https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
     gui.add(VARS, 'message');
     gui.add(VARS, 'speed', -.2, .2);
+    gui.add(VARS, 'percent', -1, 1);
 
     this.container = document.getElementById("container")
 
@@ -43,7 +44,6 @@ class Main {
   }
 
   animate() {
-    // this.materialPercent += (1 - this.materialPercent ) * .1;
     requestAnimationFrame(this.animate);
     this.render();
   }
@@ -56,6 +56,7 @@ class Main {
     this.camera.position.z = data.distance;
     // console.log((data.distanceTarget - data.distance) * 0.3)
     this.Globe.mesh.rotation.y += VARS.speed
+    this.Globe.mesh.material.uniforms.percent.value = VARS.percent;
     this.camera.lookAt(this.Globe.mesh.position);
     this.renderer.render(this.Decor.scene, this.camera);
   }
