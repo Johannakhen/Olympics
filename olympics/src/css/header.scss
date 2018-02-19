@@ -1,0 +1,26 @@
+$lightcolor: #FFF;
+$darkcolor: #000;
+
+.header{
+    position: absolute;
+    display: block;
+    width: 100%;
+    z-index: 99;
+    margin-top: 70px;
+    color: $lightcolor;
+    &__more{
+        display: inline-flex;
+        margin-right: 27px;
+        font-size: 14px;
+    }
+    &__logo{
+        display: inline-flex;
+        font-size: 30px;
+    }
+}
+.wrapper{
+    &__medium{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
