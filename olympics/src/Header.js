@@ -5,9 +5,9 @@ class Header extends Component {
   render() {
     return (
       <section className="wrapper wrapper__medium">
-        <div className="header__more">About</div>
+        <a href="#no-link" className="header__more">About</a>
         <div className="header__logo-wrapper">
-          <span className="header__logo">OUAG</span>
+          <a href="#linkToHome" className="header__logo">OUAG</a>
         </div>
       </section>
     );

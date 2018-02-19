@@ -13,9 +13,12 @@ $darkcolor: #000;
         transform: translateY(-50%);
         max-width: 50%;
         margin: 0 auto;
-        color: $lightcolor;
-        font-size: 20px;
         text-align: center;
+        color: $lightcolor;
+        font-family: "Din", sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 26px;
     }
 }
 .overlay{

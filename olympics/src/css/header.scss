@@ -1,5 +1,28 @@
 $lightcolor: #FFF;
 $darkcolor: #000;
+@font-face {
+    font-family: 'Din';
+    src: url('../fonts/DINCondensed-Bold.woff2') format('woff2'),
+        url('../fonts/DINCondensed-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Calibre';
+    src: url('../fonts/Calibre-Medium.woff2') format('woff2'),
+        url('../fonts/Calibre-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Liquido';
+    src: url('../fonts/LIQUIDO-Fluid.woff2') format('woff2'),
+        url('../fonts/LIQUIDO-Fluid.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .header{
     position: absolute;
@@ -12,10 +35,19 @@ $darkcolor: #000;
         display: inline-flex;
         margin-right: 27px;
         font-size: 14px;
+        font-family: "Calibre", sans-serif;
+        color: $lightcolor;
+        text-decoration: none;
     }
     &__logo{
         display: inline-flex;
         font-size: 30px;
+        font-family: "Liquido", sans-serif;
+        color: $lightcolor;
+        text-decoration: none;
+        &-wrapper{
+            display: inline-flex;
+        }
     }
 }
 .wrapper{
