@@ -7,7 +7,7 @@ const texture = new THREE.TextureLoader().load('./texture/world.jpg')
 
 export default class Globe {
   constructor() {
-    var geometry = new THREE.SphereGeometry(200, 40, 30);
+    var geometry = new THREE.SphereGeometry(200, 64, 64);
     // var geometry = new THREE.IcosahedronGeometry( 100, 4 )
     var material = new THREE.ShaderMaterial({
 

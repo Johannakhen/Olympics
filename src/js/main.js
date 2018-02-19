@@ -40,7 +40,7 @@ class Main {
 
     // DAT.GUI : https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
     gui.add(VARS, 'message');
-    gui.add(VARS, 'speed', -.2, .2);
+    // gui.add(VARS, 'speed', -.2, .2);
     gui.add(VARS, 'percent', -1, 1);
 
     this.container = document.getElementById("container")
@@ -53,8 +53,41 @@ class Main {
     // this.controls = new OrbitControls(this.camera) 
     this.animate = this.animate.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
-    console.log(this);
 
+  }
+
+  center(pos) {
+
+    data.target = this.calculate2dPosition(pos);
+
+  }
+
+  calculate2dPosition(coords) {
+
+    var phi = (90 + coords.lon) * Math.PI / 180;
+    var theta = (180 - coords.lat) * Math.PI / 180;
+
+    return {
+      x: phi,
+      y: Math.PI - theta
+    }
+
+  }
+
+
+  set3dPosition(mesh, coords) {
+    if(!coords)
+      coords = mesh.userData;
+
+    var x = coords.x;
+    var y = coords.y;
+    var altitude = coords.altitude;
+
+    mesh.position.set(
+      altitude * Math.sin(x) * Math.cos(y),
+      altitude * Math.sin(y),
+      altitude * Math.cos(x) * Math.cos(y)
+      );
   }
 
   animate() {
@@ -63,15 +96,25 @@ class Main {
   }
 
   render() {
-    data.distance += (data.distanceTarget - data.distance) * .3;
+    // data.distance += (data.distanceTarget - data.distance) * .3;
+
+    // Rotate towards the target
+    data.rotation.x += (data.target.x - data.rotation.x) * 0.1;
+    data.rotation.y += (data.target.y - data.rotation.y) * 0.1;
+    data.distance += (data.distanceTarget -data.distance) * 0.3;
+
     if (data.distance <= 1001) {
       data.distance = data.distanceTarget;
     }
-    this.camera.position.z = data.distance;
-    this.Globe.mesh.rotation.y += VARS.speed
+
+    this.set3dPosition(this.camera, {
+      x: data.rotation.x,
+      y: data.rotation.y,
+      altitude: data.distance
+    });
+
+    // this.Globe.mesh.rotation.y += VARS.speed
     this.Globe.mesh.material.uniforms.percent.value = VARS.percent;
-    // this.backgroundBack.move()
-    // this.backgroundFront.move()
     this.camera.lookAt(this.Globe.mesh.position);
     this.renderer.render(this.Decor.scene, this.camera);
   }
@@ -85,5 +128,27 @@ class Main {
 
 var app = new Main()
 app.animate()
+var pos = [
+[19.2464696,-99.10134979999998],
+[37.9838096,23.727538800000048],
+[51.2194475,4.40246430000002],
+[52.52000659999999,13.404953999999975],
+[-37.81361100000001,144.96305600000005],
+[41.9027835,12.496365500000024],
+[41.9027835,12.496365500000024],
+[45.5016889,-73.56725599999999],
+[55.755826,37.617299900000035],
+[33.7489954,-84.3879824],
+[51.5073509,-0.12775829999998223],
+[-22.9068467,-43.17289649999998]
+]
 
+var d = {
+  lat: pos[0][0],
+  lon: pos[0][1],
+};
+window.data = d;
+window.App = app;
 window.addEventListener('resize', app.onWindowResize, false);
+
+// pour essayer lancer dans la console App.center(data) 
