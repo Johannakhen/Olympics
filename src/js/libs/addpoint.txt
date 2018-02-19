@@ -1,0 +1,23 @@
+we loop the data and call 
+addData()
+  create the geometry
+         the latitude
+         the longitude
+         color
+         size = 0
+         and call addPoint( lat, lng, color, geometry)
+                  create phi
+                         theta
+                  get point which is {
+                    geometry = new THREE.BoxGeometry(0.75, 0.75, 1);
+                    geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0,0,-0.5));
+                    point = new THREE.Mesh(geometry);
+                  }
+                  set it position x
+                                  y
+                                  x
+                  scale the point
+                  updateMatrix
+                  subgeo.merge(point.geometry, point.matrix)
+
+and we call createPoints()            
