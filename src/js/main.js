@@ -16,6 +16,11 @@ var VARS = {
 
 class Main {
   constructor() {
+
+    this.end = this.end.bind(this);
+    this.start = this.start.bind(this);
+    this.scroll = this.scroll.bind(this);
+    this.zoomRelative = this.zoomRelative.bind(this);
     // EARTH 
     this.Globe = new Globe();
     // ATMOSPHERE
@@ -57,6 +62,16 @@ class Main {
     this.animate = this.animate.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
 
+
+    // DOM event handlers
+    this.container.addEventListener('mousedown', this.start, false);
+    window.addEventListener('resize', this.resize, false);
+
+    // Scroll for Chrome
+    window.addEventListener('mousewheel', this.scroll, false);
+    // Scroll for Firefox
+    window.addEventListener('DOMMouseScroll', this.scroll, false);
+
   }
 
   center(pos) {
@@ -92,12 +107,90 @@ class Main {
       );
   }
 
-  animate() {
-    requestAnimationFrame(this.animate);
-    this.render();
+  zoomRelative(delta) {
+    data.distanceTarget -= delta;
+    this.checkAltituteBoundries();
   }
 
-  render() {
+  checkAltituteBoundries() {
+    // max zoom
+    if(data.distanceTarget < 300)
+     data.distanceTarget = 300;
+
+    // min zoom
+    else if(data.distanceTarget > 900)
+     data.distanceTarget = 900;
+  }
+
+  // DOM event handlers
+  scroll(e) {
+    e.preventDefault();
+
+      // See
+      // @link http://www.h3xed.com/programming/javascript-mouse-scroll-wheel-events-in-firefox-and-chrome
+      if(e.wheelDelta) {
+        // chrome
+        var delta = e.wheelDelta * 0.5;
+      } else {
+        // firefox
+        var delta = -e.detail * 15;
+      }
+
+      this.zoomRelative(delta);
+
+      return false;
+    }
+
+    resize(e) {
+      // setSize();
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    // DRAG event
+    // @link https://github.com/dataarts/webgl-globe/blob/master/globe/globe.js#L273-L334
+    start(e) {
+      e.preventDefault();
+      this.container.addEventListener('mousemove', this.move, false);
+      this.container.addEventListener('mouseup', this.end, false);
+      this.container.addEventListener('mouseout', this.end, false);
+
+      data.mouseOnDown.x = -e.clientX;
+      data.mouseOnDown.y = e.clientY;
+
+      data.targetOnDown.x = data.target.x;
+      data.targetOnDown.y = data.target.y;
+
+      this.container.style.cursor = 'move';
+    }
+
+    move(e) {
+      data.mouse.x = -e.clientX;
+      data.mouse.y = e.clientY;
+
+      var zoomDamp = data.distance / 1000;
+
+      data.target.x = data.targetOnDown.x + (data.mouse.x - data.mouseOnDown.x) * 0.005 * zoomDamp;
+      data.target.y = data.targetOnDown.y + (data.mouse.y - data.mouseOnDown.y) * 0.005 * zoomDamp;
+
+      data.target.y = data.target.y > data.PI_HALF ? data.PI_HALF : data.target.y;
+      data.target.y = data.target.y < - data.PI_HALF ? - data.PI_HALF : data.target.y;
+    }
+
+    end(e) {
+      this.container.removeEventListener('mousemove', this.move, false);
+      this.container.removeEventListener('mouseup', this.end, false);
+      this.container.removeEventListener('mouseout', this.end, false);
+      this.container.style.cursor = 'auto';
+    }
+
+    animate() {
+      requestAnimationFrame(this.animate);
+      this.render();
+    }
+
+    render() {
     // data.distance += (data.distanceTarget - data.distance) * .3;
 
     // Rotate towards the target
