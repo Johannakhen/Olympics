@@ -11,37 +11,40 @@ const OrbitControls = require('three-orbit-controls')(THREE)
 var VARS = {
   message: 'Olympics',
   speed: .001,
-  percent: -1,
+  // percent: -1,
 }
 
 class Main {
   constructor() {
-    // var bscale = 3200;
+    // EARTH 
     this.Globe = new Globe();
+    // ATMOSPHERE
     this.GlobeAtmosphere = new Atmosphere();
 
-    // backgrond
-    // this.backgroundBack = new Background({style:"back",width:VARS.scale*4, height:VARS.scale, detail:0, speed: 0.3});
-    // this.backgroundBack.group.position.z = -520;
-    // this.backgroundBack.group.rotation.x = Math.PI;
 
-    // this.backgroundFront = new Background({style:"front", width:VARS.scale*4, height:VARS.scale, detail:0, speed: 0.8});
-    // this.backgroundFront.group.position.z = -510;
+    // CAMERA
+    this.camera = new THREE.PerspectiveCamera(30, data.w / data.h, 1, 10000);
+    this.camera.position.z = data.distance
+    window.c = this.camera
+
+
+    // SCENE
     this.Decor = new Decor(data);
 
-    // this.Decor.scene.add(this.backgroundBack.group);
-    // this.Decor.scene.add(this.backgroundFront.group);
-
+    // ADD ON THE SCENE
     this.Decor.scene.add(this.GlobeAtmosphere.mesh)
     this.Decor.scene.add(this.Globe.mesh)
 
-    this.camera = new THREE.PerspectiveCamera(30, data.w / data.h, 1, 10000);
-    this.camera.position.z = data.distance
+    // LIGHT
+    this.light = new THREE.DirectionalLight(0xcccccc, 0.5);
+
+    this.Decor.scene.add(new THREE.AmbientLight(0x656565));
+    this.Decor.scene.add(this.light);   
 
     // DAT.GUI : https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
     gui.add(VARS, 'message');
     // gui.add(VARS, 'speed', -.2, .2);
-    gui.add(VARS, 'percent', -1, 1);
+    // gui.add(VARS, 'percent', -1, 1);
 
     this.container = document.getElementById("container")
 
@@ -73,7 +76,6 @@ class Main {
     }
 
   }
-
 
   set3dPosition(mesh, coords) {
     if(!coords)
@@ -112,9 +114,15 @@ class Main {
       y: data.rotation.y,
       altitude: data.distance
     });
+    
+    this.set3dPosition(this.light, {
+      x: data.rotation.x - 150,
+      y: data.rotation.y - 150,
+      altitude: data.distance
+    });
 
     // this.Globe.mesh.rotation.y += VARS.speed
-    this.Globe.mesh.material.uniforms.percent.value = VARS.percent;
+    // this.Globe.mesh.material.uniforms.percent.value = VARS.percent;
     this.camera.lookAt(this.Globe.mesh.position);
     this.renderer.render(this.Decor.scene, this.camera);
   }
