@@ -4,7 +4,7 @@ import './css/header.scss';
 class Header extends Component {
   render() {
     return (
-      <header class="header">
+      <header className="header">
       <section className="wrapper wrapper__medium">
         <a href="#no-link" className="header__more">About</a>
         <div className="header__logo-wrapper">
