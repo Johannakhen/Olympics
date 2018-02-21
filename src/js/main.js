@@ -11,16 +11,19 @@ const OrbitControls = require('three-orbit-controls')(THREE)
 var VARS = {
   message: 'Olympics',
   speed: .001,
-  // percent: -1,
+  percent: 1.,
 }
 
 class Main {
   constructor() {
 
+    this.add = this.add.bind(this);
     this.end = this.end.bind(this);
     this.start = this.start.bind(this);
     this.scroll = this.scroll.bind(this);
     this.zoomRelative = this.zoomRelative.bind(this);
+    this.createBlock = this.createBlock.bind(this);
+    this.addLevitatingBlock = this.addLevitatingBlock.bind(this);
     // EARTH 
     this.Globe = new Globe();
     // ATMOSPHERE
@@ -48,8 +51,8 @@ class Main {
 
     // DAT.GUI : https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
     gui.add(VARS, 'message');
-    // gui.add(VARS, 'speed', -.2, .2);
-    // gui.add(VARS, 'percent', -1, 1);
+    gui.add(VARS, 'speed', -.2, .2);
+    gui.add(VARS, 'percent', 0, 1);
 
     this.container = document.getElementById("container")
 
@@ -65,13 +68,62 @@ class Main {
 
     // DOM event handlers
     this.container.addEventListener('mousedown', this.start, false);
-    window.addEventListener('resize', this.resize, false);
+    // window.addEventListener('resize', this.resize, false);
 
     // Scroll for Chrome
     window.addEventListener('mousewheel', this.scroll, false);
     // Scroll for Firefox
     window.addEventListener('DOMMouseScroll', this.scroll, false);
 
+    this.add();
+
+  }
+
+  add() {
+   console.log(data.cityPosition.length) 
+
+   this.addLevitatingBlock(data.cityPosition[0][0])
+    for (var i = 0; i < data.cityPosition.length ; i++) {
+      var city = data.cityPosition[i]
+      this.addLevitatingBlock(city[0])
+    }
+  }
+
+  createBlock(properties) {
+    // create mesh
+    var block = new THREE.Mesh(
+        new THREE.BoxGeometry(1, 1, 1),
+        new THREE.MeshLambertMaterial({color: '#'+Math.floor(Math.random()*16777215).toString(16)})
+      );
+
+    // calculate 2d position
+    var pos2d = this.calculate2dPosition(properties);
+
+    // add altitute
+    pos2d.altitude = 200 + 10 / 2;
+
+    // calculate 3d position
+    this.set3dPosition(block, pos2d);
+
+    // rotate towards earth
+    console.log(this.Globe.mesh.position)
+    block.lookAt(this.Globe.mesh.position);
+
+    block.scale.z = 10;
+    block.scale.x = 10;
+    block.scale.y = 10;
+
+    block.updateMatrix();
+    
+    return block;
+  }
+
+  addLevitatingBlock(data) {
+    var block = this.createBlock(data);
+
+    this.Decor.scene.add(block);
+    // data.levitatingBlocks.push(block);
+    // data.blocks.push(block);
   }
 
   center(pos) {
@@ -82,6 +134,7 @@ class Main {
 
   calculate2dPosition(coords) {
 
+    console.log(coords)
     var phi = (90 + coords.lon) * Math.PI / 180;
     var theta = (180 - coords.lat) * Math.PI / 180;
 
@@ -112,6 +165,12 @@ class Main {
     this.checkAltituteBoundries();
   }
 
+  zoomTo(altitute) {
+    data.distanceTarget = altitute;
+    this.checkAltituteBoundries();
+  }
+
+
   checkAltituteBoundries() {
     // max zoom
     if(data.distanceTarget < 300)
@@ -139,13 +198,6 @@ class Main {
       this.zoomRelative(delta);
 
       return false;
-    }
-
-    resize(e) {
-      // setSize();
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      renderer.setSize(w, h);
     }
 
     // DRAG event
@@ -248,7 +300,8 @@ var d = {
   lat: pos[0][0],
   lon: pos[0][1],
 };
-window.data = d;
+window.data = data;
+window.mexico = d 
 window.App = app;
 window.addEventListener('resize', app.onWindowResize, false);
 
