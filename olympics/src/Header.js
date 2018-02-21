@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import './css/header.scss';
 
 class Header extends Component {
+  showPanel(){
+    var element = document.getElementById('close');
+    element.classList.add('opened');
+    element.addEventListener('click', () => {
+      element.classList.remove('opened');
+    });
+  }
   render() {
     return (
-      <header className="header">
+      <header className="header" id="header">
       <section className="wrapper wrapper__medium">
         <nav role="navigation">
           <div id="menuToggle">
-            <input type="checkbox" />
+            <input id="close" />
             <span></span>
             <span></span>
             <span></span>
@@ -20,9 +27,9 @@ class Header extends Component {
             </ul>
           </div>
         </nav>
-        <a href="#no-link" className="header__more">About</a>
-        <div className="header__logo-wrapper">
-          <a href="#linkToHome" className="header__logo">OUAG</a>
+        <li id="header__more" onClick={this.showPanel}>About</li>
+        <div id="header__logo-wrapper">
+          <a href="#linkToHome" id="header__logo">OUAG</a>
         </div>
       </section>
       </header>

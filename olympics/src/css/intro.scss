@@ -2,8 +2,9 @@ $lightcolor: #FFF;
 $darkcolor: #000;
 
 .intro{
+    height: 100%;
     &__wrapper{
-        height: 100vh;
+        height: 100%;
         background-image: url(../img/intro-background.jpg);
         background-size: cover;
     }
@@ -31,4 +32,16 @@ $darkcolor: #000;
     bottom: 0;
     background-color: #222222;
     opacity: .5;
+}
+
+.sound{
+    position: absolute;
+    right: 35px;
+    bottom: 15px;
+    #sound__bars{
+        margin-right: 20px;
+    }
+    .icon{
+        cursor: pointer;
+    }
 }

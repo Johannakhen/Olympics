@@ -23,8 +23,10 @@ $darkcolor: #000;
     font-weight: normal;
     font-style: normal;
 }
-
-.header{
+html,body{
+    height: 100%;
+}
+#header{
     position: absolute;
     display: block;
     width: 100%;
@@ -38,6 +40,7 @@ $darkcolor: #000;
         font-family: "Calibre", sans-serif;
         color: $lightcolor;
         text-decoration: none;
+        cursor: pointer;
     }
     &__logo{
         display: inline-flex;
@@ -53,10 +56,17 @@ $darkcolor: #000;
         display: inline-flex;
     }
 }
+#root{
+    height: 100%;
+    &>div{
+        height: 100%;
+    }
+}
 .wrapper{
     &__medium{
         max-width: 1200px;
         margin: 0 auto;
+        height: 100%;
     }
 }
 
@@ -67,7 +77,7 @@ $darkcolor: #000;
     z-index: 1;
     user-select: none;
     input{
-        display: block;
+        display: none;
         width: 40px;
         height: 32px;
         position: absolute;
@@ -77,9 +87,12 @@ $darkcolor: #000;
         opacity: 0;
         z-index: 2;
         -webkit-touch-callout: none;
+        &.opened{
+            display: block;
+        }
     }
     span{
-        display: block;
+        display: none;
         width: 33px;
         height: 4px;
         margin-bottom: 5px;
@@ -96,7 +109,8 @@ $darkcolor: #000;
             transform-origin: 0% 100%;
         }
     }
-    input:checked ~ span{
+    .opened ~ span{
+        display: block;
         opacity: 1;
         transform: rotate(45deg) translate(-2px, -1px);
         background: #232323;
@@ -108,15 +122,15 @@ $darkcolor: #000;
             transform: rotate(-45deg) translate(0, -1px);
         }
     }
-    input:checked ~ ul{
+    .opened ~ ul{
         transform: none;
     }
 }
 
 #menu{
     position: absolute;
-    height: 100vh;
-    width: 80vw;
+    height: 75.5vh;
+    width: 70vw;
     margin: -100px 0 0 -50px;
     padding: 50px;
     padding-top: 125px;
@@ -126,6 +140,10 @@ $darkcolor: #000;
     transform-origin: 0% 0%;
     transform: translate(-100%, 0);
     transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    a{
+        color: $lightcolor;
+        text-decoration: none;
+    }
     li{
         padding: 10px 0;
         font-size: 22px;
