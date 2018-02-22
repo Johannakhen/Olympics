@@ -25,8 +25,19 @@ class Intro extends Component {
     tl.staggerFrom(chars, 0.8, {opacity:0, scale:0}, 0.01, "+=0");
   }
   soundClick(){
-    var element = document.getElementById('headset');
+    const element = document.getElementById('headset');
+    const audio = document.getElementById('audio');
+
+    element.addEventListener('click', function() {
       element.classList.toggle('mute');
+      audio.muted = true;
+    })
+    const selector = document.querySelectorAll('mute');
+    if(selector.length){
+      selector.addEventListener('click', function() {
+        audio.muted = false;
+      })
+    }
   }
 
   render() {
@@ -46,7 +57,7 @@ class Intro extends Component {
           <div className="sound__wrapper">
           <img className="img-responsive icon" id="sound__bars" src={soundBars} alt="sound bars"/>
           <span id="headset">
-            <img className="img-responsive icon" id="headset__icon" src={sound} onClick={this.soundClick} alt="sound"/>
+            <img className="img-responsive icon" id="headset__icon" src={sound} onLoad={this.soundClick} alt="sound"/>
           </span>
           </div>
         </section>
