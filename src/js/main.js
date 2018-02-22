@@ -7,6 +7,10 @@ import Atmosphere from './component/Atmosphere'
 
 import gui from 'libs/gui'
 
+var raycaster;
+var mouse;
+var objects = []
+
 const OrbitControls = require('three-orbit-controls')(THREE)
 var VARS = {
   message: 'Olympics',
@@ -26,6 +30,7 @@ class Main {
     this.addLevitatingBlock = this.addLevitatingBlock.bind(this);
     this.animate = this.animate.bind(this);
     this.onWindowResize = this.onWindowResize.bind(this);
+    this.onDocumentMouseDown = this.onDocumentMouseDown.bind(this)
     // EARTH 
     this.Globe = new Globe();
     // ATMOSPHERE
@@ -71,6 +76,10 @@ class Main {
     window.addEventListener('mousewheel', this.scroll, false);
     // Scroll for Firefox
     window.addEventListener('DOMMouseScroll', this.scroll, false);
+    document.addEventListener( 'mousedown', this.onDocumentMouseDown, false );
+    document.addEventListener( 'touchstart', this.onDocumentTouchStart, false );
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
 
     this.add();
 
@@ -80,20 +89,20 @@ class Main {
 
    this.addLevitatingBlock(data.cityPosition[0][0])
 
-    for (var i = 0; i < data.cityPosition.length ; i++) {
-      var city = data.cityPosition[i]
-      this.addLevitatingBlock(city[0])
-    }
-
+   for (var i = 0; i < data.cityPosition.length ; i++) {
+    var city = data.cityPosition[i]
+    this.addLevitatingBlock(city[0])
   }
 
-  createBlock(properties) {
+}
+
+createBlock(properties) {
     // create mesh
     var block = new THREE.Mesh(
-        new THREE.BoxGeometry(1, 1, 1),
+      new THREE.BoxGeometry(.5,.5,.5),
         // new THREE.MeshLambertMaterial({color: '#'+Math.floor(Math.random()*16777215).toString(16)})
         new THREE.MeshLambertMaterial({color: '#fff'})
-      );
+        );
 
     // calculate 2d position
     var pos2d = this.calculate2dPosition(properties);
@@ -120,8 +129,37 @@ class Main {
     var block = this.createBlock(data);
 
     this.Decor.scene.add(block);
+    objects.push(block)
     // data.levitatingBlocks.push(block);
     // data.blocks.push(block);
+  }
+
+  onDocumentMouseDown( event ) {
+
+    event.preventDefault();
+
+    mouse.x = ( event.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY /this.renderer.domElement.clientHeight ) * 2 + 1;
+
+    raycaster.setFromCamera( mouse, this.camera );
+
+    var intersects = raycaster.intersectObjects( objects );
+
+    if ( intersects.length > 0 ) {
+      console.log(intersects)
+      intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
+    }
+
+  }
+
+  onDocumentTouchStart( event ) {
+
+    event.preventDefault();
+
+    event.clientX = event.touches[0].clientX;
+    event.clientY = event.touches[0].clientY;
+    this.onDocumentMouseDown( event );
+
   }
 
   center(pos) {
@@ -132,7 +170,6 @@ class Main {
 
   calculate2dPosition(coords) {
 
-    console.log(coords)
     var phi = (90 + coords.lon) * Math.PI / 180;
     var theta = (180 - coords.lat) * Math.PI / 180;
 
@@ -177,7 +214,7 @@ class Main {
     // min zoom
     else if(data.distanceTarget > 900)
      data.distanceTarget = 900;
-  }
+ }
 
   // DOM event handlers
   scroll(e) {
