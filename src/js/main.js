@@ -127,7 +127,9 @@ createBlock(properties) {
 
   addLevitatingBlock(data) {
     var block = this.createBlock(data);
-
+    block.name = data.city 
+    block.lat = data.lat
+    block.lon = data.lon
     this.Decor.scene.add(block);
     objects.push(block)
     // data.levitatingBlocks.push(block);
@@ -144,10 +146,16 @@ createBlock(properties) {
     raycaster.setFromCamera( mouse, this.camera );
 
     var intersects = raycaster.intersectObjects( objects );
-
+    var that = this
     if ( intersects.length > 0 ) {
-      console.log(intersects)
       intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
+      var el = intersects[ 0 ].object
+      this.center(el)
+      setTimeout(function(){
+        that.zoomTo(el.position.z)
+      },1000).bin
+
+      console.log(el)
     }
 
   }
@@ -201,15 +209,15 @@ createBlock(properties) {
   }
 
   zoomTo(altitute) {
-    data.distanceTarget = altitute;
+    data.distanceTarget = (data.distanceTarget - altitute ) * .001;
     this.checkAltituteBoundries();
   }
 
 
   checkAltituteBoundries() {
     // max zoom
-    if(data.distanceTarget < 300)
-     data.distanceTarget = 300;
+    if(data.distanceTarget < 220)
+     data.distanceTarget = 220;
 
     // min zoom
     else if(data.distanceTarget > 900)
