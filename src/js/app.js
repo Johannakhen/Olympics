@@ -5,6 +5,6 @@ import Main from './main'
 
 
 var app = new Main();
-app.animate();
+window.app = app
 
 ReactDOM.render(<App/>,document.getElementById('root'));

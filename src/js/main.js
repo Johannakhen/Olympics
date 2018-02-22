@@ -3,6 +3,7 @@ import data from './data'
 import Decor from './component/Decor'
 import Globe from './component/Globe'
 import Atmosphere from './component/Atmosphere'
+import { TweenMax } from 'gsap'
 // import Background from './component/Background'
 
 
@@ -11,6 +12,8 @@ import Atmosphere from './component/Atmosphere'
 var raycaster;
 var mouse;
 var objects = []
+var tween = { x: 0, y: 0} 
+var zommedIn, zoomedOut, animating
 
 // const OrbitControls = require('three-orbit-controls')(THREE)
 var VARS = {
@@ -169,6 +172,9 @@ createBlock(properties) {
   center(pos) {
 
     data.target = this.calculate2dPosition(pos);
+    setTimeout(function(){
+      this.zoomIn()
+    }.bind(this),500)
 
   }
 
@@ -204,8 +210,37 @@ createBlock(properties) {
     this.checkAltituteBoundries();
   }
 
-  zoomTo(altitute) {
-    data.distanceTarget = (data.distanceTarget - altitute ) * .001;
+  zoomIn() {
+    var counter = { var: 4 };
+    var that = this
+    TweenMax.to(counter, 3, {
+      var: 5, 
+      onUpdate: function () {
+        that.zoomRelative(counter.var)
+        animating = true
+      },
+      onComplete: function(){
+        animating = false
+      },
+      ease:Circ.easeOut
+    });
+    this.checkAltituteBoundries();
+  }
+
+  zoomOut() {
+    var counter = { var: 0 };
+    var that = this
+    TweenMax.to(counter, 4, {
+      var: -5, 
+      onUpdate: function () {
+        that.zoomRelative(counter.var)
+        animating = true
+      },
+      onComplete: function() {
+        animating = false
+      },
+      ease:Circ.easeOut
+    });
     this.checkAltituteBoundries();
   }
 
@@ -222,6 +257,7 @@ createBlock(properties) {
 
   // DOM event handlers
   scroll(e) {
+    if(animating) return
     e.preventDefault();
 
       // See
