@@ -5,7 +5,25 @@
 global-reset()
 reset-html5()
 lightcolor #FFF 
-darkcolor #000 
+darkcolor #000
+@font-face
+	font-family Din
+	src url(../fonts/DINCondensed-Bold.woff2)
+	font-weight bold
+	font-style normal
+
+@font-face
+	font-family Calibre
+	src url(../fonts/Calibre-Medium.woff2)
+	font-weight 500
+	font-style normal
+
+@font-face
+	font-family Liquido
+	src url(../fonts/LIQUIDO-Fluid.woff2)
+	font-weight normal
+	font-style normal
+
 
 html, body
 	width 100%
@@ -23,5 +41,9 @@ html, body
 	&__navinside 
 		li
 			display inline
-			maring-right 20px
+			margin-right 20px
+			a
+				font-family Calibre, sans-serif
+				text-decoration none
+				color #fff
 
