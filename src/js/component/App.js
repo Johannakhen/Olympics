@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // import Header from './Header';
 // import './css/header.scss';
 // import './css/intro.scss';
-// import {TimelineLite,TweenLite} from 'gsap';
-// import _gsScope from './js/SplitText';
+import {TimelineLite,TweenLite} from 'gsap';
+import _gsScope from './libs/SplitText';
 // import sound from './img/sound.svg';
 // import soundBars from './img/sound-bars.svg';
 
