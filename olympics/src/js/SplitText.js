@@ -427,5 +427,5 @@ var _gsScope = (typeof(module) !== "undefined" && module.exports && typeof(globa
   //   module.exports = getGlobal();
   // }
 }("SplitText"));
-
-export default _gsScope;
+var SplitText = _gsScope 
+export default SplitText;

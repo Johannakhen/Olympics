@@ -1,5 +1,6 @@
 @import 'nib'
 @import './slide'
+@import './font'
 
 // GENERIC
 global-reset()
@@ -10,8 +11,10 @@ darkcolor #000
 
 html, body
 	overflow hidden
+	font-family 'DB', sans-serif
+	// background red
 	min-height 100%
-	background #000
+	// background #000
 	
 #root, html, body
 	height 100%
@@ -29,6 +32,7 @@ html, body
 			display inline
 			margin-right 20px
 			a
+				font-family 'DB', sans-serif
 				text-decoration none
 				color #fff
 	&__intro
@@ -37,8 +41,9 @@ html, body
 		max-width 800px
 		margin 0 auto
 		&--text
+			font-family 'L', sans-serif
 			text-align center
 			color #fff
-			font-size 20
+			font-size 20px
 			line-height 26px
 			font-weight bold
