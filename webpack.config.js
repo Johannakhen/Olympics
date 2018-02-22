@@ -85,7 +85,7 @@ else {
 
 module.exports = {
 	devtool: isProduction?false:'eval-source-map',
-	entry: [__dirname+"/src/js/Main"],
+	entry: [__dirname+"/src/js/Main",__dirname+"/src/js/app"],
 	output: {
 		path: path.resolve(__dirname,'app/bin/'),
 		filename: 'bundle.js',
@@ -102,6 +102,7 @@ module.exports = {
 				presets: [
 					['es2015',{loose:true,modules:false}],
 					["stage-0"],
+					["react"]
 					// ['env', { 'modules': false, 'targets': { 'node': 4 } }]
 				],
 				retainLines:false,

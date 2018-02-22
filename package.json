@@ -58,5 +58,10 @@
     "js:prod-extra": "webpack --progress --display-modules --display-reasons --display-exclude='vue' -p",
     "css:dev": "mkdirp app/css && stylus ./src/stylus/main.styl -o app/css/main.css -u nib --sourcemap -w",
     "css:dist": "stylus src/stylus/main.styl -o app/css -u nib -c"
+  },
+  "dependencies": {
+    "babel-preset-react": "^6.24.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }

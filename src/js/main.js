@@ -5,20 +5,21 @@ import Globe from './component/Globe'
 import Atmosphere from './component/Atmosphere'
 // import Background from './component/Background'
 
-import gui from 'libs/gui'
+
+// import gui from 'libs/gui'
 
 var raycaster;
 var mouse;
 var objects = []
 
-const OrbitControls = require('three-orbit-controls')(THREE)
+// const OrbitControls = require('three-orbit-controls')(THREE)
 var VARS = {
   message: 'Olympics',
   speed: .001,
   percent: 1.,
 }
 
-class Main {
+export default class Main {
   constructor() {
 
     this.add = this.add.bind(this);
@@ -55,9 +56,9 @@ class Main {
     this.Decor.scene.add(this.light);   
 
     // DAT.GUI : https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage
-    gui.add(VARS, 'message');
-    gui.add(VARS, 'speed', -.2, .2);
-    gui.add(VARS, 'percent', 0, 1);
+    // gui.add(VARS, 'message');
+    // gui.add(VARS, 'speed', -.2, .2);
+    // gui.add(VARS, 'percent', 0, 1);
 
     this.container = document.getElementById("container")
 
@@ -148,14 +149,9 @@ createBlock(properties) {
     var intersects = raycaster.intersectObjects( objects );
     var that = this
     if ( intersects.length > 0 ) {
-      intersects[ 0 ].object.material.color.setHex( Math.random() * 0xffffff );
       var el = intersects[ 0 ].object
+      el.material.color.setHex( Math.random() * 0xffffff );
       this.center(el)
-      setTimeout(function(){
-        that.zoomTo(el.position.z)
-      },1000).bin
-
-      console.log(el)
     }
 
   }
@@ -322,5 +318,6 @@ createBlock(properties) {
   }
 }
 
-var app = new Main()
-app.animate()
+
+// var app = new Main()
+// app.animate()

@@ -4,6 +4,8 @@
 // GENERIC
 global-reset()
 reset-html5()
+lightcolor #FFF 
+darkcolor #000 
 
 html, body
 	width 100%
@@ -11,3 +13,15 @@ html, body
 	overflow hidden
 	min-height 100%
 	background #000
+
+.app 
+	position relative
+	&__nav 
+		position absolute
+		top 80px
+		left 115px
+	&__navinside 
+		li
+			display inline
+			maring-right 20px
+
