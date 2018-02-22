@@ -14,9 +14,13 @@ html, body
 	overflow hidden
 	min-height 100%
 	background #000
-
+	
+#root, html, body
+	height 100%
+	
 .app 
 	position relative
+	height 100%
 	&__nav 
 		position absolute
 		top 80px
@@ -28,4 +32,9 @@ html, body
 			a
 				text-decoration none
 				color #fff
-
+	&__intro
+		position relative
+		top 50%
+		max-width 1200px
+		&--text
+			color #fff
