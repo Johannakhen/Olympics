@@ -1,0 +1,48 @@
+$lightcolor: #FFF;
+$darkcolor: #000;
+
+.intro{
+    height: 100%;
+    &__wrapper{
+        height: 100%;
+        background-image: url(../img/intro-background.jpg);
+        background-size: cover;
+    }
+    &__text{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        max-width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        color: $lightcolor;
+        font-family: "Din", sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 26px;
+    }
+}
+.overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #222222;
+    opacity: .5;
+    pointer-events: none;
+}
+
+.sound{
+    position: absolute;
+    right: 35px;
+    bottom: 15px;
+    #sound__bars{
+        margin-right: 20px;
+    }
+    .icon{
+        cursor: pointer;
+    }
+}
