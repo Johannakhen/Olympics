@@ -3,7 +3,7 @@ import earthVert from 'shaders/earth.vert'
 import earthFrag from 'shaders/earth.frag'
 
 const texture = new THREE.TextureLoader().load('./texture/uvgrid.jpg')
-const map = new THREE.TextureLoader().load('./texture/world.jpg')
+const map = new THREE.TextureLoader().load('./texture/_world.jpg')
 const bump = new THREE.TextureLoader().load('./texture/bump.jpg')
 const specular = new THREE.TextureLoader().load('./texture/specular.jpg')
 

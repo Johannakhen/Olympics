@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 
-const bg = new THREE.Color( 0x2c2c2c );
+const bg = new THREE.Color( 0x000 );
 export default class Decor {
   constructor(opt){
     this.camera = new THREE.PerspectiveCamera(30, opt.w / opt.h, 1, 10000);

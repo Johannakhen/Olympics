@@ -24,6 +24,8 @@ class Main {
     this.zoomRelative = this.zoomRelative.bind(this);
     this.createBlock = this.createBlock.bind(this);
     this.addLevitatingBlock = this.addLevitatingBlock.bind(this);
+    this.animate = this.animate.bind(this);
+    this.onWindowResize = this.onWindowResize.bind(this);
     // EARTH 
     this.Globe = new Globe();
     // ATMOSPHERE
@@ -33,8 +35,6 @@ class Main {
     // CAMERA
     this.camera = new THREE.PerspectiveCamera(30, data.w / data.h, 1, 10000);
     this.camera.position.z = data.distance
-    window.c = this.camera
-
 
     // SCENE
     this.Decor = new Decor(data);
@@ -61,13 +61,10 @@ class Main {
 
     this.renderer.domElement.style.position = 'absolute';
     this.container.appendChild(this.renderer.domElement);
-    // this.controls = new OrbitControls(this.camera) 
-    this.animate = this.animate.bind(this);
-    this.onWindowResize = this.onWindowResize.bind(this);
-
 
     // DOM event handlers
     this.container.addEventListener('mousedown', this.start, false);
+    window.addEventListener('resize', this.onWindowResize, false);
     // window.addEventListener('resize', this.resize, false);
 
     // Scroll for Chrome
@@ -80,20 +77,22 @@ class Main {
   }
 
   add() {
-   console.log(data.cityPosition.length) 
 
    this.addLevitatingBlock(data.cityPosition[0][0])
+
     for (var i = 0; i < data.cityPosition.length ; i++) {
       var city = data.cityPosition[i]
       this.addLevitatingBlock(city[0])
     }
+
   }
 
   createBlock(properties) {
     // create mesh
     var block = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshLambertMaterial({color: '#'+Math.floor(Math.random()*16777215).toString(16)})
+        // new THREE.MeshLambertMaterial({color: '#'+Math.floor(Math.random()*16777215).toString(16)})
+        new THREE.MeshLambertMaterial({color: '#fff'})
       );
 
     // calculate 2d position
@@ -106,7 +105,6 @@ class Main {
     this.set3dPosition(block, pos2d);
 
     // rotate towards earth
-    console.log(this.Globe.mesh.position)
     block.lookAt(this.Globe.mesh.position);
 
     block.scale.z = 10;
@@ -281,28 +279,3 @@ class Main {
 
 var app = new Main()
 app.animate()
-var pos = [
-[19.2464696,-99.10134979999998],
-[37.9838096,23.727538800000048],
-[51.2194475,4.40246430000002],
-[52.52000659999999,13.404953999999975],
-[-37.81361100000001,144.96305600000005],
-[41.9027835,12.496365500000024],
-[41.9027835,12.496365500000024],
-[45.5016889,-73.56725599999999],
-[55.755826,37.617299900000035],
-[33.7489954,-84.3879824],
-[51.5073509,-0.12775829999998223],
-[-22.9068467,-43.17289649999998]
-]
-
-var d = {
-  lat: pos[0][0],
-  lon: pos[0][1],
-};
-window.data = data;
-window.mexico = d 
-window.App = app;
-window.addEventListener('resize', app.onWindowResize, false);
-
-// pour essayer lancer dans la console App.center(data) 
