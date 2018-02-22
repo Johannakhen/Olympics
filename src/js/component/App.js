@@ -22,7 +22,11 @@ export default class App extends Component {
             <li><a href="">About</a></li>
             <li><a href="">Ouag</a></li>  
           </ul>
-        </div> 
+        </div>
+        <div className="app__intro">
+          <p className="app__intro--text">At the outset, a sporting event is a gathering of persons sharing the same passion.
+            What is supposed to be so neutral can be triggering real socio-political leverages.</p>
+        </div>
       </div>
     );
   }
