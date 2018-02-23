@@ -28,6 +28,7 @@ html, body
 		position absolute
 		top 80px
 		left 115px
+		z-index 1
 	&__navinside
 		li
 			display inline
@@ -40,6 +41,16 @@ html, body
 				font-size 20px
 				text-decoration none
 				color #fff
+		.active::before
+			content ''
+			position: absolute
+			display inline
+			height: 20px
+			width: 20px
+			background-image url(../img/menu.png)
+			background-size cover
+			margin-left -25px
+
 	&__intro
 		position relative
 		top 50%
@@ -54,6 +65,15 @@ html, body
 			font-weight bold
 			text-transform uppercase
 
+.app__map
+	float right
+	position relative
+	top 50%
+	transform translateY(-50%)
+	margin-right 50px
+	.path
+		opacity 0.4
+
 #panel
 	position absolute
 	width 100%
@@ -61,7 +81,8 @@ html, body
 	top 0
 	background #000000
 	transform translateX(-200%)
-	transition transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0)
+	transition transform 1s cubic-bezier(0.77,0.2,0.05,1.0)
+	z-index 0
 	&.show
 		transform none
 	&__wrapper
@@ -72,6 +93,8 @@ html, body
 		top: 50%
 		transform translateY(-50%)
 		color #ffffff
+		@media screen and (max-width: 768px)
+			padding 0 10px
 	a
 		position absolute
 		top 80px
@@ -86,8 +109,24 @@ html, body
 			font-family "DB",serif
 			line-height 26px
 			vertical-align top
+			@media screen and (max-width: 768px)
+				display block
+				width 100%
 		&__right
 			display table-cell
 			padding-left 50px
 			font-family "CM",serif
 			font-size 20px
+			@media screen and (max-width: 768px)
+				display block
+				padding-left 0
+				margin-top 50px
+			strong
+				display block
+				margin-bottom 20px
+			p
+				margin-bottom 50px;
+				opacity 0.8
+			small
+				opacity 0.8
+				font-size 15px
