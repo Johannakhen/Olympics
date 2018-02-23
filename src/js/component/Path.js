@@ -13,9 +13,11 @@ export default class Path extends Component {
     showCountry(e){
         this.pane = document.querySelector('#panel')
         this.paneText = this.pane.querySelector('.align__right')
+        this.link = document.querySelector('#link')
         console.log(this.pane,this.paneText)
 
         var el = e.target.parentElement
+        this.link.classList.add('active')
         el.classList.add('clicked')
         var city = el.getAttribute('id')
         var i = el.classList.contains('second') ? 'text2': 'text'; // text index
