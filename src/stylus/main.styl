@@ -5,7 +5,7 @@
 // GENERIC
 global-reset()
 reset-html5()
-lightcolor #FFF 
+lightcolor #FFF
 darkcolor #000
 
 
@@ -15,35 +15,79 @@ html, body
 	// background red
 	min-height 100%
 	// background #000
-	
 #root, html, body
 	height 100%
-	
-.app 
+
+.app
 	position relative
 	height 100%
 	background-color #000
-	&__nav 
+	background-image url(../img/intro-background.jpg)
+	background-size: cover
+	&__nav
 		position absolute
 		top 80px
 		left 115px
-	&__navinside 
+	&__navinside
 		li
 			display inline
 			margin-right 20px
+			&:last-child
+				a
+					font-family: 'L', sans-serif
 			a
 				font-family 'DB', sans-serif
+				font-size 20px
 				text-decoration none
 				color #fff
 	&__intro
 		position relative
 		top 50%
-		max-width 800px
+		max-width 600px
 		margin 0 auto
 		&--text
-			font-family 'L', sans-serif
+			font-family 'DB', sans-serif
 			text-align center
 			color #fff
 			font-size 20px
 			line-height 26px
 			font-weight bold
+			text-transform uppercase
+
+#panel
+	position absolute
+	width 100%
+	height 100%
+	top 0
+	background #000000
+	transform translateX(-200%)
+	transition transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0)
+	&.show
+		transform none
+	&__wrapper
+		max-width 1200px
+		margin 0 auto
+		position relative
+		display table
+		top: 50%
+		transform translateY(-50%)
+		color #ffffff
+	a
+		position absolute
+		top 80px
+		left 115px
+		color #ffffff
+		text-decoration none
+	.align
+		&__left
+			display table-cell
+			width 22%
+			font-size 50px
+			font-family "DB",serif
+			line-height 26px
+			vertical-align top
+		&__right
+			display table-cell
+			padding-left 50px
+			font-family "CM",serif
+			font-size 20px
