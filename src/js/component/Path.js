@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 export default class Path extends Component {
 
@@ -68,48 +68,48 @@ export default class Path extends Component {
                         </g>
                     </g>
                     <g id="Group-3" transform="translate(13.000000, 0.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Post-war-Climate" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Post-war-Climate" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="0.268" y="8">Post-war Climate</tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(45.000000, 69.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Confusion" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Confusion" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="2.784" y="8">Confusion </tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(0.000000, 206.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Endangered-Neutralit" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Endangered-Neutralit" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="0.432" y="8">Endangered Neutrality</tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(59.000000, 350.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Values-Flouted" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Values-Flouted" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="0.236" y="8">Values Flouted</tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(89.000000, 483.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Boycott" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Boycott" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="0.608" y="8">Boycott</tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(67.000000, 560.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Breach-of-Human-Righ" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Breach-of-Human-Righ" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="28.628" y="8">Breach of </tspan>
                             <tspan x="6.872" y="20">Human Rights</tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(60.000000, 133.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="A-Violent-Turn" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="A-Violent-Turn" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="0.628" y="8">A Violent Turn</tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(12.000000, 280.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Oath’s-Instigation" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Oath’s-Instigation" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="0.964" y="8">Oath’s Instigation</tspan>
                         </text>
                     </g>
                     <g id="Group-3" transform="translate(72.000000, 409.000000)" fill="#FFFFFF" fontFamily="Calibre-Medium, Calibre" fontSize="12" fontWeight="400">
-                        <text id="Struggle-shout" class="path" cursor="pointer" onClick={this.showCountry}>
+                        <text id="Struggle-shout" className="path" cursor="pointer" onClick={this.showCountry}>
                             <tspan x="0.752" y="8">Struggle shout</tspan>
                         </text>
                     </g>

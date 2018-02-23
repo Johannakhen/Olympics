@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {TimelineLite,TweenLite} from 'gsap';
 import SplitText from '../libs/SplitText';
 import Path from './path';
+import Main from '../main'
 // import sound from './img/sound.svg';
 // import soundBars from './img/sound-bars.svg';
 
@@ -10,6 +11,8 @@ export default class App extends Component {
   constructor (){
     super()
     this.close = this.close;
+    this.start = this.start.bind(this)
+    this.gl = new Main();
   }
 
   animate(){
@@ -24,6 +27,11 @@ export default class App extends Component {
     const app__map = document.getElementById('app__map')
     intro.classList.add("slideUp")
     app__map.classList.add("active")
+    var that = this
+    setTimeout(function(){
+      console.log(that)
+      that.gl.animate()
+    },800)
   }
 
   show(){
