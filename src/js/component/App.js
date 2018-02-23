@@ -31,7 +31,6 @@ export default class App extends Component {
     app__map.classList.add("active")
     var that = this
     setTimeout(function(){
-      console.log(that)
       that.gl.animate()
     },800)
   }
@@ -70,7 +69,7 @@ export default class App extends Component {
           </div>
         </div>
         <div className="app__map" id="app__map">
-          <Path/>
+          <Path globe={this.gl}/>
         </div>
       </section>
     );
