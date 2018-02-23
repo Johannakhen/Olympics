@@ -19,6 +19,11 @@ export default class Path extends Component {
 
         var el = e.target.parentElement
         this.link.classList.add('active')
+        if (this.link.classList.contains("active")) {
+          this.link.innerHTML = "Close";
+        } else {
+            this.link.innerHTML = "About";
+        }
         el.classList.add('clicked')
         var city = el.getAttribute('id')
         var i = el.classList.contains('second') ? 'text2': 'text'; // text index
