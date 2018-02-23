@@ -12,9 +12,12 @@ export default class App extends Component {
 
   constructor (){
     super()
-    this.close = this.close;
     this.start = this.start.bind(this)
     this.gl = new Main();
+  }
+
+  componentDidMount() {
+
   }
 
   animate(){

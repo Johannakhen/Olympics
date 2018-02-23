@@ -10,12 +10,13 @@ export default class Path extends Component {
         this.showCountry = this.showCountry.bind(this)
       }
 
-    componentDidMount() {
-        console.log(this.props)
-    }
-
     showCountry(e){
+        this.pane = document.querySelector('#panel')
+        this.paneText = this.pane.querySelector('.align__right')
+        console.log(this.pane,this.paneText)
+
         var el = e.target.parentElement
+        el.classList.add('clicked')
         var city = el.getAttribute('id')
         var i = el.classList.contains('second') ? 'text2': 'text'; // text index
         var text  
@@ -23,10 +24,11 @@ export default class Path extends Component {
             var g = c[0]
 
             if( g.city == city) {
-                // console.log(g)
                 this.props.globe.center(g)
                 text = g[i]
+                this.paneText.innerHTML = text
                 console.log(g,text)
+                this.pane.classList.add('show')
             }
         })
     }
