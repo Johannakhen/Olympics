@@ -3,8 +3,8 @@ const path = require('path');
 const url = require("url")
 const fs = require("fs")
 
-const isProduction = process.argv.indexOf("--env.compress") > -1
-// const isProduction = true 
+// const isProduction = process.argv.indexOf("--env.compress") > -1
+const isProduction = true 
 const isClassic = process.argv.indexOf("-d") > -1
 
 console.log('webpack isProduction?',isProduction)

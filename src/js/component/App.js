@@ -4,6 +4,7 @@ import SplitText from '../libs/SplitText';
 import Path from './path';
 import Main from '../main'
 import Panel from './Panel'
+import data from '../data'
 
 import Sound from './Sound';
 import SoundBar from './SoundBar';
@@ -47,7 +48,9 @@ export default class App extends Component {
   show(){
   
     event.preventDefault();
-    const panel = document.getElementById('panel')
+    const panel = document.querySelector('#panel')
+    const alignl = panel.querySelector('.align__left')
+    const alignr = panel.querySelector('.align__right')
     const link =  document.getElementById('link')
     panel.classList.toggle('show')
     link.classList.toggle('active')
@@ -55,6 +58,10 @@ export default class App extends Component {
       link.innerHTML = "Close";
     } else {
         link.innerHTML = "About";
+    }
+    if(alignl.innerHTML != data.cityPosition[data.cityPosition.length -1][0].city ) {
+      alignl.innerHTML = data.cityPosition[data.cityPosition.length -1][0].city
+      alignr.innerHTML = data.cityPosition[data.cityPosition.length -1][0].text
     }
   }
 

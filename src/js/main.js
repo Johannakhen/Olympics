@@ -170,11 +170,11 @@ createBlock(properties) {
 
   }
 
-  center(pos) {
+  center(pos,fn = null) {
 
     data.target = this.calculate2dPosition(pos);
     setTimeout(function(){
-      this.zoomIn()
+      this.zoomIn(fn)
     }.bind(this),500)
 
   }
@@ -211,7 +211,7 @@ createBlock(properties) {
     this.checkAltituteBoundries();
   }
 
-  zoomIn() {
+  zoomIn(fn) {
     var counter = { var: 4 };
     var that = this
     TweenMax.to(counter, 3, {
@@ -222,13 +222,14 @@ createBlock(properties) {
       },
       onComplete: function(){
         animating = false
+        fn()
       },
       ease:Circ.easeOut
     });
     this.checkAltituteBoundries();
   }
 
-  zoomOut() {
+  zoomOut(fn) {
     var counter = { var: 0 };
     var that = this
     TweenMax.to(counter, 4, {
@@ -239,6 +240,7 @@ createBlock(properties) {
       },
       onComplete: function() {
         animating = false
+        fn()
       },
       ease:Circ.easeOut
     });

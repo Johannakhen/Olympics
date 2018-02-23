@@ -15,32 +15,38 @@ export default class Path extends Component {
         this.alingr = this.pane.querySelector('.align__right')
         this.alingl = this.pane.querySelector('.align__left')
         this.link = document.querySelector('#link')
-        console.log(this.pane,this.alingr)
 
         var el = e.target.parentElement
         this.link.classList.add('active')
-        if (this.link.classList.contains("active")) {
-          this.link.innerHTML = "Close";
-        } else {
-            this.link.innerHTML = "About";
-        }
+        
         el.classList.add('clicked')
         var city = el.getAttribute('id')
         var i = el.classList.contains('second') ? 'text2': 'text'; // text index
         var text  
+        var that = this
         var rightCity = this.cities.map( (c,index) => {
             var g = c[0]
 
             if( g.city == city) {
-                this.props.globe.center(g)
-                text = g[i]
-                this.alingr.innerHTML = text
-                this.alingl.innerHTML = g.city
-                console.log(g,text)
-                this.pane.classList.add('show')
+                this.props.globe.center(g,function(){
+                    if (that.link.classList.contains("active")) {
+                        that.link.innerHTML = "Close";
+                    } else {
+                        that.link.innerHTML = "About";
+                    }
+
+                    that.pane.classList.add('show')
+                    text = g[i]
+                    that.alingr.innerHTML = text
+                    that.alingl.innerHTML = g.city
+                    setTimeout(function(){
+                        that.props.globe.zoomOut()
+                    },700)
+                })
             }
         })
     }
+
     render(){
         return(
             <svg width="160px" height="584px" viewBox="0 0 160 584" version="1.1" xmlns="http://www.w3.org/2000/svg">
