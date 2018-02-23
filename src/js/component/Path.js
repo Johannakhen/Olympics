@@ -12,9 +12,10 @@ export default class Path extends Component {
 
     showCountry(e){
         this.pane = document.querySelector('#panel')
-        this.paneText = this.pane.querySelector('.align__right')
+        this.alingr = this.pane.querySelector('.align__right')
+        this.alingl = this.pane.querySelector('.align__left')
         this.link = document.querySelector('#link')
-        console.log(this.pane,this.paneText)
+        console.log(this.pane,this.alingr)
 
         var el = e.target.parentElement
         this.link.classList.add('active')
@@ -28,7 +29,8 @@ export default class Path extends Component {
             if( g.city == city) {
                 this.props.globe.center(g)
                 text = g[i]
-                this.paneText.innerHTML = text
+                this.alingr.innerHTML = text
+                this.alingl.innerHTML = g.city
                 console.log(g,text)
                 this.pane.classList.add('show')
             }
