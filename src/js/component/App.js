@@ -5,8 +5,8 @@ import Path from './path';
 import Main from '../main'
 import Panel from './Panel'
 
-// import sound from './img/sound.svg';
-// import soundBars from './img/sound-bars.svg';
+import Sound from './Sound';
+import SoundBar from './SoundBar';
 
 export default class App extends Component {
 
@@ -35,6 +35,12 @@ export default class App extends Component {
       that.gl.animate()
     },800)
   }
+  mute(){
+    const element = document.getElementById('mute');
+    const audio = document.getElementById('audio');
+      element.classList.toggle('mutedSound');
+      audio.muted = true;
+  }
 
   show(){
   
@@ -54,6 +60,9 @@ export default class App extends Component {
   render() {
     return (
       <section>
+      {/*<audio>
+        <source src="./img/bm.mp3" type="audio/mp3">
+      </audio>*/}
        <div className="app__nav">
           <ul className="app__navinside">
             <li><img src=""/></li>
@@ -72,6 +81,14 @@ export default class App extends Component {
         <div className="app__map" id="app__map">
           <Path/>
         </div>
+        <div className="app__sound" id="mute" onClick={this.mute}>
+          <div className="app__soundBar">
+            <SoundBar/>
+          </div>
+          <div className="app__headset">
+            <Sound/>
+          </div>
+        </div>  
       </section>
     );
   }

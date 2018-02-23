@@ -29,7 +29,7 @@ html, body
 		position absolute
 		top 80px
 		left 115px
-		z-index 1
+		z-index 2
 	&__navinside
 		li
 			display inline
@@ -72,6 +72,18 @@ html, body
 			border-radius 20px
 			font-family 'DB', sans-serif
 			font-size 18px
+	&__sound
+		position absolute
+		bottom 20px
+		right 20px
+		&.mutedSound
+			opacity: 0.4
+	&__soundBar
+		display inline-block
+	&__headset
+		display inline-block
+		margin-left 10px
+						
 .slideUp
 	transform translateY(-200%)
 	transition transform 1s cubic-bezier(0.77,0.2,0.05,1.0)
@@ -101,13 +113,15 @@ html, body
 	z-index 0
 	&.show
 		transform none
+		z-index 1
 	&__wrapper
-		max-width 1200px
+		max-width 1070px
 		margin 0 auto
 		position relative
 		display table
 		top: 50%
 		transform translateY(-50%)
+		margin-top 50px
 		color #ffffff
 		@media screen and (max-width: 768px)
 			padding 0 10px
@@ -120,22 +134,23 @@ html, body
 	.align
 		&__left
 			display table-cell
-			width 22%
+			width 25%
 			font-size 50px
-			font-family "DB",serif
-			line-height 26px
+			font-family sans-serif
+			line-height 56px
 			vertical-align top
+			text-transform uppercase
 			@media screen and (max-width: 768px)
 				display block
 				width 100%
 		&__right
 			display table-cell
-			padding-left 50px
+			padding 0 150px
 			font-family "CM",serif
 			font-size 20px
 			@media screen and (max-width: 768px)
 				display block
-				padding-left 0
+				padding 0
 				margin-top 50px
 			strong
 				display block
