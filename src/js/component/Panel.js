@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 export default class Panel extends Component {
 
+
 	// show() {
 	//     const panel = document.getElementById('panel')
 	//     panel.classList.toggle('show')
