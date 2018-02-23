@@ -95,6 +95,7 @@ export default class Main {
 
    for (var i = 0; i < data.cityPosition.length ; i++) {
     var city = data.cityPosition[i]
+    if(!data.cityPosition[i]) return 
     this.addLevitatingBlock(city[0])
   }
 
