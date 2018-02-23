@@ -19,8 +19,9 @@ html, body
 	height 100%
 
 .app
-	position relative
+	position absolute
 	height 100%
+	width: 100%
 	background-color #000
 	background-image url(../img/intro-background.jpg)
 	background-size: cover
@@ -56,6 +57,7 @@ html, body
 		top 50%
 		max-width 600px
 		margin 0 auto
+		text-align center
 		&--text
 			font-family 'DB', sans-serif
 			text-align center
@@ -64,13 +66,27 @@ html, body
 			line-height 26px
 			font-weight bold
 			text-transform uppercase
-
+		#showMap
+			margin-top 20px
+			padding 10px 20px
+			border-radius 20px
+			font-family 'DB', sans-serif
+			font-size 18px
+.slideUp
+	transform translateY(-200%)
+	transition transform 1s cubic-bezier(0.77,0.2,0.05,1.0)
+	
 .app__map
 	float right
-	position relative
+	position absolute
 	top 50%
-	transform translateY(-50%)
+	right 0
+	transform translate3D(200%,-50%,0)
 	margin-right 50px
+	transition transform 1.4s cubic-bezier(0.77,0.2,0.05,1.0)
+	
+	&.active
+		transform translate3D(0%,-50%,0)
 	.path
 		opacity 0.4
 
