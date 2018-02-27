@@ -3,8 +3,8 @@ const path = require('path');
 const url = require("url")
 const fs = require("fs")
 
-// const isProduction = process.argv.indexOf("--env.compress") > -1
-const isProduction = true 
+const isProduction = process.argv.indexOf("--env.compress") > -1
+//const isProduction = true 
 const isClassic = process.argv.indexOf("-d") > -1
 
 console.log('webpack isProduction?',isProduction)
@@ -109,7 +109,19 @@ module.exports = {
 				retainLines:false,
 			} },
 			{ test: /\.(html)$/, use: ['raw-loader']},
-			{ test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' }
+			{ test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
+			{
+				test: /\.(gif|png|jpe?g|svg)$/i,
+				use: [
+					'file-loader',
+					{
+						loader: 'image-webpack-loader',
+						options: {
+							bypassOnDebug: true,
+						},
+					},
+				]
+			}
 		],
 	},
 
